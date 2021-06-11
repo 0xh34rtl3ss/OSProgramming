@@ -1,5 +1,8 @@
 # OSProgramming
 
+Course : CSCI 3300 OPERATING SYSTEMS
+Section : 1
+
 Team Members:
 Name  | Matric No
 ------------- | -------------
