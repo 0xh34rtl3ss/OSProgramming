@@ -1,6 +1,6 @@
 # OSProgramming
 
-Course : CSCI 3300 OPERATING SYSTEMS
+Course : CSCI 3300 OPERATING SYSTEMS <br />
 Section : 1
 
 Team Members:
