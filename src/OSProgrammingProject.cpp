@@ -90,9 +90,27 @@ void SafeSequence (int *noProcess, int *noResources, vector<int> &allocation, ve
 
 
     int avail[m];//buat array and masukkan value vector ke dalam array
-     for(int j=0; j<m; j++){
-       avail[j] = resources[j];
+
+    for(int i=0; i<m; i++){
+        avail[i]=0;
+    }
+
+    cout<<allocation.size()<<" "<<avail[0]<<endl;
+
+
+    for(int c=0; c<m; c++){
+        for(int j=c; j<allocation.size(); j=j+m){
+            avail[c] += allocation[j];
      }
+    }
+
+    for(int v=0; v<m; v++){
+        avail[v] = resources[v]-avail[v];
+    }
+     
+
+
+
 
     
 
@@ -157,7 +175,7 @@ void SafeSequence (int *noProcess, int *noResources, vector<int> &allocation, ve
     cout << "\n\nFollowing is the SAFE Sequence" << endl;
     for (int i = 0; i < n - 1; i++)
         cout << " Thread " << ans[i] << ",";
-    cout << " Thread" << ans[n - 1] <<endl;
+    cout << " Thread " << ans[n - 1] <<endl;
 
 
 }
