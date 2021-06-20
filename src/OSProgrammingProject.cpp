@@ -1,66 +1,143 @@
 #include<iostream>
 #include<string>
 #include <fstream>
+#include<vector>
+
 using namespace std;
 
 
 
 
-int main(){
+void GetNumberofResources( int *m, string str){ //tujuan: nk kira ada brapa resources
 
-   // Create a text string, which is used to output the text file
-    string myText;
+    int count=1;
+    string word = "";
 
-    // Read from the text file
-    ifstream MyReadFile("inputfile.txt");
+    for (auto x : str) 
+    {
+        
+        if (x == ' ')
+        {   
+            
+            // cout<<word << endl;
+            count++;
+            word = "";
+        }
+        else {
+            word = word + x;
+        }
+    }
+    count++;
+    *m = count;
+    // cout <<word << endl;
 
-    // Use a while loop together with the getline() function to read the file line by line
-    while (getline (MyReadFile, myText)) {
-    // Output the text from the file
-    cout << myText;
-            }
-
-    // Close the file
-    MyReadFile.close();
+}
 
 
 
 
-    // P0, P1, P2, P3, P4 are the Process names here
-  
-    int n, m, i, j, k;
-    n = 5; // Number of processes
-    m = 3; // Number of resources
-    int alloc[5][3] = { { 0, 1, 0 }, // P0 // Allocation Matrix
-                        { 2, 0, 0 }, // P1
-                        { 3, 0, 2 }, // P2
-                        { 2, 1, 1 }, // P3
-                        { 0, 0, 2 } }; // P4
-  
-    int max[5][3] = { { 7, 5, 3 }, // P0 // MAX Matrix
-                    { 3, 2, 2 }, // P1
-                    { 9, 0, 2 }, // P2
-                    { 2, 2, 2 }, // P3
-                    { 4, 3, 3 } }; // P4
-  
-    int avail[3] = { 3, 3, 2 }; // Available Resources
-  
+void parseValue( vector<int> &arr, string str){
+
+    string word = "";
+   
+
+    for (auto x : str) 
+    {
+        
+        if (x == ' ')
+        {   
+             //cout<<word << endl;
+            arr.push_back(stoi(word));
+          // *((arr+ *(rows))+(count)) = stoi(word);
+            word = "";
+        }
+        else {
+            word = word + x;
+        }
+    }
+    
+    arr.push_back(stoi(word));
+
+
+
+}
+
+
+void SafeSequence (int *noProcess, int *noResources, vector<int> &allocation, vector<int> &maximum, vector<int> &resources  ){
+
+
+
+    int n = *noProcess; // Number of processes
+    int m = *noResources; // Number of resources
+
+    cout<<"m2: "<<m<<endl;
+
+
+     int alloc[n][m] ; //buat array and masukkan value vector ke dalam array
+    for(int i=0; i<n; i++){
+     for(int j=0; j<m; j++){
+       alloc[i][j] = allocation[ (i*m) + j];
+     }
+    }
+
+
+    int max[n][m];//buat array and masukkan value vector ke dalam array
+    for(int i=0; i<n; i++){
+     for(int j=0; j<m; j++){
+       max[i][j] = maximum[ (i*m) + j];
+     }
+    }
+
+
+    int avail[m];//buat array and masukkan value vector ke dalam array
+     for(int j=0; j<m; j++){
+       avail[j] = resources[j];
+     }
+
+    
+
+    //display all arrays
+    cout<<"m: "<<m<<" n: "<<n<<endl;
+
+    cout<<"\nalloc: ";
+    for(int x=0; x<n; x++){
+        cout<<endl;
+        for(int y=0; y<m; y++){
+            cout<<alloc[x][y]<<" ";
+        }
+    }
+
+    cout<<"\n\nmax: ";
+    for(int x=0; x<n; x++){
+        cout<<endl;
+        for(int y=0; y<m; y++){
+            cout<<max[x][y]<<" ";
+        }
+    }
+
+        cout<<"\n\navail: "<<endl;
+        for(int y=0; y<m; y++){
+            cout<<avail[y]<<" ";
+        }
+    
+    
+  //bankers algo here
     int f[n], ans[n], ind = 0;
-    for (k = 0; k < n; k++) {
+    for (int k = 0; k < n; k++) {
         f[k] = 0;
     }
     int need[n][m];
-    for (i = 0; i < n; i++) {
-        for (j = 0; j < m; j++)
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++)
             need[i][j] = max[i][j] - alloc[i][j];
     }
     int y = 0;
-    for (k = 0; k < 5; k++) {
-        for (i = 0; i < n; i++) {
+    for (int k = 0; k < 5; k++) {
+        for (int i = 0; i < n; i++) {
             if (f[i] == 0) {
   
                 int flag = 0;
-                for (j = 0; j < m; j++) {
+                for (int j = 0; j < m; j++) {
                     if (need[i][j] > avail[j]){
                         flag = 1;
                         break;
@@ -77,12 +154,125 @@ int main(){
         }
     }
   
-    cout << "Following is the SAFE Sequence" << endl;
-    for (i = 0; i < n - 1; i++)
-        cout << " P" << ans[i] << " ->";
-    cout << " P" << ans[n - 1] <<endl;
+    cout << "\n\nFollowing is the SAFE Sequence" << endl;
+    for (int i = 0; i < n - 1; i++)
+        cout << " Thread " << ans[i] << ",";
+    cout << " Thread" << ans[n - 1] <<endl;
 
 
+}
+
+int main(){
+
+
+    
+    int m = 0 ; //number of resources
+    int NoProcess = 0;
+
+
+    string myText;
+    int countline=1;
+    
+
+    // Read from the text file
+    ifstream MyReadFile("../inputfile.txt");
+    
+    
+
+    // Use a while loop together with the getline() function to read the file line by line
+    while (getline (MyReadFile, myText)) { //tujuan: nak kira number of line dlm txt and number of resources
+        
+        if(countline==2){
+         GetNumberofResources(&m,myText);
+        }
+        countline++;
+
+    }
+    MyReadFile.close();
+    countline--;
+    m--;
+
+
+
+
+    //count how many process are there in the txt
+    NoProcess = (countline-6)/2;
+
+    //initialize kan all the vectors
+    vector<int> resources;
+    vector<int> maximum;
+    vector<int> allocation;
+    vector<int> available;
+
+
+    int line=1;
+
+
+
+    cout<<"total line: "<<countline<<endl;
+    cout<<"no of resources: "<<m<<endl;
+    cout<<"no of processes: "<<NoProcess<<endl;
+
+    if(countline <= 7 || ( countline >7 && countline%2!=0) ){
+        cout<<"insufficient/unbalanced values in inputfile.txt!"<<endl; //nak make sure yang number of matrix balanced
+    }
+
+    else{ //baru ambik values2 dlm notepad
+
+   
+    ifstream MyReadFile2("../inputfile.txt"); 
+
+
+
+     while ( getline (MyReadFile2, myText) ){
+
+
+         if(line==2){
+             int i=0;
+             parseValue(resources, myText);
+             line++;
+
+         }
+         else if(line>=5 && line <= ((5+NoProcess)-1)){
+             
+            parseValue(maximum, myText);
+        
+             line++;
+
+             
+
+         }
+         else if(line > (((5+NoProcess)-1)+2) && line <= countline ){
+            parseValue(allocation,myText);
+             line++;
+
+         }
+         else{
+             line++;
+         }
+
+    }
+    
+    MyReadFile2.close();
+
+    SafeSequence(&NoProcess,&m,allocation,maximum,resources);
+
+
+
+
+    
+
+
+
+
+    
+
+    
+
+
+    
+
+    }
     
 
     
