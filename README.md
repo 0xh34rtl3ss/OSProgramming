@@ -27,7 +27,12 @@ This program is developed for the purpose of finding the safe sequence of proces
 
 ## Limitations
 
-Requires to exactly follow the template provided (changes in the template will cause the program to be unable to execute)
+This code is developed in one environment only. To avoid any compatibility issues, we decided to use an online compiler so that the environment will be standardised
+
+- Requires to exactly follow the template provided (changes in the template will cause the program to be unable to execute)
+- Compatibility issues:
+1. Different version of operating system
+2. Online IDE 
 
 ## Editing the input file
 
@@ -37,5 +42,5 @@ Requires to exactly follow the template provided (changes in the template will c
 
 ## Installation
 
-1. Clone the repo locally
-2. Run "name_of_program.exe"
+1. Open this link https://replit.com/join/cpectbkwdn-imranmohamad26
+2. Run the program
