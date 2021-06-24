@@ -27,7 +27,7 @@ This program is developed for the purpose of finding the safe sequence of proces
 
 ## Limitations
 
--This code is developed in one environment only. To avoid any compatibility issues, such as different Operating System or different compiler. we decided to use an online IDE so that the environment will be standardised.
+- This code is developed in one environment only. To avoid any compatibility issues, such as different Operating System or different compiler. we decided to use an online IDE so that the environment will be standardised.
 - Requires to exactly follow the template provided (changes in the template will may cause the program to be unable to execute)
 
 ## Editing the input file
