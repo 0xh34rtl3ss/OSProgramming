@@ -41,7 +41,7 @@ This program is developed for the purpose of finding the safe sequence of proces
 1. Open this link [Replit](https://replit.com/join/cpectbkwdn-imranmohamad26)
 2. Run the program
 
-the program will display the banker's algorithm table if all the process are satisifed with the condition and thus display the safe sequence.
+the program will display the banker's algorithm table if all the process are satisifed with the conditions and thus display the safe sequence.
 if not, the program will display '-1'
 
-the user will run exit if the user enter '0'
+the program will terminate if the user enter '0'
