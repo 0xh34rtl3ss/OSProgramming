@@ -23,16 +23,12 @@ This program is developed for the purpose of finding the safe sequence of proces
 ## Features
 
 - Able to determine if the file has unbalanced or insufficient data
-- Not limited to only 3 resources and 5 processes
+- Not limited to 3 resources or 5 processes only
 
 ## Limitations
 
-This code is developed in one environment only. To avoid any compatibility issues, we decided to use an online compiler so that the environment will be standardised
-
+-This code is developed in one environment only. To avoid any compatibility issues, such as different Operating System or different compiler. we decided to use an online IDE so that the environment will be standardised.
 - Requires to exactly follow the template provided (changes in the template will may cause the program to be unable to execute)
-- Compatibility issues:
-1. Different version of operating system
-2. Online IDE 
 
 ## Editing the input file
 
@@ -40,7 +36,12 @@ This code is developed in one environment only. To avoid any compatibility issue
 - Eliminate extra space at the end of each line
 - Eliminate extra line at the end of the file
 
-## Installation
+## Executing the Program
 
 1. Open this link [Replit](https://replit.com/join/cpectbkwdn-imranmohamad26)
 2. Run the program
+
+the program will display the banker's algorithm table if all the process are satisifed with the condition and thus display the safe sequence.
+if not, the program will display '-1'
+
+the user will run exit if the user enter '0'
