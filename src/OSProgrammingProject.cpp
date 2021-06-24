@@ -6,6 +6,7 @@
 #include <iomanip>
 #include <cstdlib>
 #include <stdlib.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -94,6 +95,7 @@ int parseValue( vector<int> &arr, string str){
 }
 
 
+
 void SafeSequence (int *noProcess, int *noResources, vector<int> &allocation, vector<int> &maximum, vector<int> &resources, int thread, vector<int> &input  ){
 
 
@@ -101,8 +103,8 @@ void SafeSequence (int *noProcess, int *noResources, vector<int> &allocation, ve
     int n = *noProcess; // Number of processes
     int m = *noResources; // Number of resources
     vector <int>temp_avail;
-    vector <int>temp_alloc;
-    vector <int>temp_need;
+
+  
 
 
    // cout<<"m2: "<<m<<endl;
@@ -149,6 +151,7 @@ void SafeSequence (int *noProcess, int *noResources, vector<int> &allocation, ve
             need[i][j] = max[i][j] - alloc[i][j];
     }
 
+
  
      
   //process the request
@@ -162,7 +165,7 @@ void SafeSequence (int *noProcess, int *noResources, vector<int> &allocation, ve
     int start= pow(10,(m-1));
    // cout<<"start: "<<start<<endl;
 
-    int j=0;
+    int j=0; //dapatkan int from array sebab nk compare
     while(start>=1 && j<m){
       tempNeed += (need[thread][j]*start);
       tempRequest += (input[j+1]*start);
@@ -175,34 +178,14 @@ void SafeSequence (int *noProcess, int *noResources, vector<int> &allocation, ve
     }
 
 
-    //  for(int j=0; j<m; j++){
-    //     tempNeed += need[thread][j];
-    //  }
-
-    //  for(int j=1; j<=m; j++){
-    //     tempRequest += input[j];
-    //  }
-
-    //  for(int j=0; j<m; j++){
-    //     tempAvail += avail[j];
-    //  }
-
-     //cout<<"\ntemp: "<<tempNeed<<", "<<tempRequest<<", "<<tempAvail<<", "<<tempAlloc<<endl;
-
     if(tempRequest<=tempNeed && tempRequest<=tempAvail){
-     // cout<<"0"<<endl;
+
 
       //update values to the one requested
       tempAvail = tempAvail - tempRequest; 
       tempAlloc = tempAlloc + tempRequest;
       tempNeed = tempNeed - tempRequest;
 
-    //HERE
-      for(int i=0; i<m; i++){
-        temp_need.push_back(need[thread][i]);
-        temp_avail.push_back(avail[i]);
-        temp_alloc.push_back(alloc[thread][i]);
-      }
 
 
       //reset the values to 0
@@ -218,6 +201,10 @@ void SafeSequence (int *noProcess, int *noResources, vector<int> &allocation, ve
       avail[j] = ( tempAvail % 10);
       j--;
       tempAvail = tempAvail / 10;
+      }
+
+        for(int i=0; i<m; i++){
+        temp_avail.push_back(avail[i]);
       }
 
       int l= (m-1);
@@ -267,24 +254,99 @@ void SafeSequence (int *noProcess, int *noResources, vector<int> &allocation, ve
         }
     }
 
-    cout<<"counter: "<<counter<<endl;
     if(counter==n){
 
         // //display all arrays
     clear_screen();
+
     bool displayed=false;
-
     cout<<"alloc"<<"\t"<<"max"<<setw(10)<<"avail"<<setw(10)<<"need"<<endl;
-
     for(int x=0; x<n; x++){ //m=no of resources
     cout<<endl;
-
       for(int j=0; j<4; j++){
-
-
-
         if(j==0){
+          for(int y=0; y<m; y++){
+            cout<<alloc[x][y]<<" ";
+          }
+          cout<<"\t";
+        }
+        else if(j==1){
 
+          for(int y=0; y<m; y++){
+            cout<<max[x][y]<<" ";
+          }
+          cout<<"\t";
+        }
+        else if(j==2){
+
+          if(displayed==1){
+            for(int y=0; y<m; y++){
+            cout<<"  ";
+            }
+            cout<<"\t";
+          }
+          
+          
+          else{
+
+          for(int y=0; y<temp_avail.size(); y++){
+            cout<<temp_avail[y]<<" ";
+          }
+          cout<<"\t";
+          displayed=1;
+
+          }        
+
+          }
+
+        
+        else if(j==3){
+
+          for(int y=0; y<m; y++){
+            cout<<need[x][y]<<" ";
+          }
+          cout<<"\t";
+
+        }
+      
+      }
+      
+    }
+    
+
+
+      cout << "\n\n0" << endl;
+      for (int i = 0; i < n - 1; i++)
+        cout << " Thread " << ans[i] << ",";
+      cout << " Thread " << ans[n - 1] <<endl;
+
+
+
+    }
+    else{
+    clear_screen();
+       cout<<"-1"<<endl;
+    }
+
+
+
+    }
+    else{
+    clear_screen();
+      cout<<"-1"<<endl;
+
+    }
+    
+  }
+  else{
+
+
+       bool displayed=false;
+    cout<<"alloc"<<"\t"<<"max"<<setw(10)<<"avail"<<setw(10)<<"need"<<endl;
+    for(int x=0; x<n; x++){ //m=no of resources
+    cout<<endl;
+      for(int j=0; j<4; j++){
+        if(j==0){
           for(int y=0; y<m; y++){
             cout<<alloc[x][y]<<" ";
           }
@@ -315,10 +377,7 @@ void SafeSequence (int *noProcess, int *noResources, vector<int> &allocation, ve
           cout<<"\t";
           displayed=1;
 
-          }
-          
-
-          
+          }        
 
           }
 
@@ -331,73 +390,54 @@ void SafeSequence (int *noProcess, int *noResources, vector<int> &allocation, ve
           cout<<"\t";
 
         }
-        
-
+      
       }
-
-
       
     }
-    
 
-    // cout<<"\nalloc: ";
-    // for(int x=0; x<n; x++){
-    //     cout<<endl;
-    //     for(int y=0; y<m; y++){
-    //         cout<<alloc[x][y]<<" ";
-    //     }
-    // }
+    int f[n], ans[n], ind = 0;
+    for (int k = 0; k < n; k++) {
+        f[k] = 0;
+    }
 
-    // cout<<"\n\nmax: ";
-    // for(int x=0; x<n; x++){
-    //     cout<<endl;
-    //     for(int y=0; y<m; y++){
-    //         cout<<max[x][y]<<" ";
-    //     }
-    // }
+        int y = 0;
+    int counter=0;
+    for (int k = 0; k < n; k++) { //initiallly 5
+        for (int i = 0; i < n; i++) {
+            if (f[i] == 0) {
+  
+                int flag = 0;
+                for (int j = 0; j < m; j++) {
+                    if (need[i][j] > avail[j]){
+                        flag = 1;
+                        
+                        break;
+                    }
+                }
+  
+                if (flag == 0) {
+                    ans[ind++] = i;
+                    counter++;
+                    for (y = 0; y < m; y++)
+                        avail[y] += alloc[i][y];
+                    f[i] = 1;
+                }
+            }
+        }
+    }
 
-    //     cout<<"\n\navail: "<<endl; //need to fix this 
-    //     for(int y=0; y<m; y++){
-    //         cout<<avail[y]<<" ";
-    //     }
-
-    //     cout<<"\n\nneed: ";
-    // for(int x=0; x<n; x++){
-    //     cout<<endl;
-    //     for(int y=0; y<m; y++){
-    //         cout<<need[x][y]<<" ";
-    //     }
-    // }
-
-      cout << "\n\n0" << endl;
+          cout << "\n\n0" << endl;
       for (int i = 0; i < n - 1; i++)
         cout << " Thread " << ans[i] << ",";
       cout << " Thread " << ans[n - 1] <<endl;
 
-    for(int i=0; i<m; i++){
-      need[thread][i]=temp_need[i];
-      alloc[thread][i]=temp_alloc[i];
-      avail[i]=temp_avail[i];
-    }
-
-
-    }
-    else{
-    clear_screen();
-       cout<<"-1"<<endl;
-    }
 
 
 
-    }
-    else{
-    clear_screen();
-      cout<<"-1"<<endl;
 
-    }
-    
   }
 
+    
 
 
 
@@ -422,7 +462,8 @@ int main(){
     
 
     // Read from the text file
-    ifstream MyReadFile("inputfile.txt");
+    ifstream MyReadFile("../inputfile.txt");
+    cout<<"opening file..."<<endl;
     
     
 
@@ -436,6 +477,7 @@ int main(){
 
     }
     MyReadFile.close();
+    cout<<"file read succesfully..."<<endl;
     countline--;
     m--;
 
@@ -457,7 +499,7 @@ int main(){
 
 
 
-    cout<<"total line: "<<countline<<endl;
+    cout<<"total no of line: "<<countline<<endl;
     cout<<"no of resources: "<<m<<endl;
     cout<<"no of processes: "<<NoProcess<<endl;
 
@@ -467,8 +509,8 @@ int main(){
 
     else{ //baru ambik values2 dlm notepad
 
-   
-    ifstream MyReadFile2("inputfile.txt"); 
+   cout<<"importing values from file..."<<endl;
+    ifstream MyReadFile2("../inputfile.txt"); 
 
 
 
@@ -511,6 +553,7 @@ int main(){
     }
     
     MyReadFile2.close();
+    cout<<"successfully importing values from file..."<<endl;
 
     string userinput="1";
     vector<int> uservalues;
