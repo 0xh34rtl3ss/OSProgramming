@@ -29,7 +29,7 @@ This program is developed for the purpose of finding the safe sequence of proces
 
 This code is developed in one environment only. To avoid any compatibility issues, we decided to use an online compiler so that the environment will be standardised
 
-- Requires to exactly follow the template provided (changes in the template will cause the program to be unable to execute)
+- Requires to exactly follow the template provided (changes in the template will may cause the program to be unable to execute)
 - Compatibility issues:
 1. Different version of operating system
 2. Online IDE 
@@ -42,5 +42,5 @@ This code is developed in one environment only. To avoid any compatibility issue
 
 ## Installation
 
-1. Open this link https://replit.com/join/cpectbkwdn-imranmohamad26
+1. Open this link [Replit](https://replit.com/join/cpectbkwdn-imranmohamad26)
 2. Run the program
